@@ -1,0 +1,98 @@
+#%RAML 1.0
+title: Documentation Projet INF5190
+baseUri: http://127.0.0.1:5000
+version : 1
+
+types:
+    installation:
+        properties:
+            nomInstallation:
+                type: string
+                required: true
+    piscine:
+        properties:
+            
+    glissade:
+        properties:
+
+    patinoire:
+        properties:
+
+/doc:
+    get:
+        description: Obtenir la documentation générale de l'application web.
+
+/api:
+    /installations:
+        get:
+            description: Obtenir les installations en format JSON selon l'arrondissement demmandé. 
+            queryParameters:
+                arrondissements:
+                    description: Spécifier l'arrondissement pour afficher les installations.
+                    type: string
+                    required: true
+                    example: ?arrondissement=Ahuntsic
+            
+                type:
+                    description: Spécifier le type d'installation pour afficher les installations.
+                    type: string
+                    required: true
+                    example: ?type=piscine
+            
+            responses:
+                200:
+                    body:
+                        application/json:
+                            type: installation
+                400:
+                    body:
+                        error: L'arrondissement demandé n'existe pas.
+    
+    /csv:
+        get:
+            description: Obtenir les installations en format CSV selon le type demmandé.
+            queryParameters:
+                type:
+                    description: Spécifier le type d'installation pour afficher les installations.
+                    type: string
+                    required: true
+                    example: ?type=piscine
+
+            responses:
+                200:
+                    body:
+                        application/csv:
+                            type: installation
+                400:
+                    body:
+                        error: L'arrondissement demandé n'existe pas.    
+
+
+    /xml:
+        get:
+            description: Obtenir les installations en format XML selon le type demmandé.
+            queryParameters:
+                type:
+                    description: Spécifier le type d'installation pour afficher les installations.
+                    type: string
+                    required: true
+                    example: ?type=piscine
+
+            responses:
+                200:
+                    body:
+                        application/xml:
+                            type: installation
+                400:
+                    body:
+                        error: L'arrondissement demandé n'existe pas. 
+
+
+    /glissade:
+        patch:
+            description: Modifier l'état d'une glissade par son nom (nom_installation).
+            responses:
+                200:
+                    description: La glissade a été modifiée.
+                400:
+                     description: La glissade n'a pas été trouvée.

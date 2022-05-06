@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{%block content%}
+
+<h1>{{ arrondissements }}</h1>
+{% for pos, nom in arrondissements %}
+
+<p>{{pos}}</p>
+<p>{{nom}}</p>
+
+{% endfor %}
+
+{%endblock%}
